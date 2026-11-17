@@ -59,6 +59,7 @@ verify the converter output first, then record it here.
 | ᠵᠠᠬᠤ | ᠵᠠᠬ᠎ᠠ (jaka) | percentage point (in "percent's jaka") | ᡬᡪᢇᡨ | 2026-11-17 |
 | ᠦᠨᠡ | ᠦᠨ᠎ᠠ (üne) | price | ᡥᡭᡬᡰᡨ | 2026-11-17 |
 | ᠳᠤᠤᠷᠠ | ᠳᠣᠣᠷ᠎ᠠ (doora) | lowest / below (in "lowest price") | ᢘᡭᡭᢝᡨ | 2026-11-17 |
+| ᠰᠠᠷᠠ | ᠰᠠᠷ᠎ᠠ (sara) | month (in "a month ago") | ᢔᡪᢝᡨ | 2026-11-17 |
 
 ## General rules (from the corrections above)
 
