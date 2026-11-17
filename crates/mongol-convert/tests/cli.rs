@@ -256,3 +256,24 @@ fn suffix_repair_reads_stdin_and_literal_option_can_be_escaped() {
     assert_eq!(out.stdout, b"--repair-suffix-separators");
     assert!(out.stderr.is_empty());
 }
+
+#[test]
+fn ga_after_ang_keeps_hook_form_in_masculine_words() {
+    // "England": medial GA after ANG ("ngg") must stay the hook form U+E031 (Z52 ᢊ),
+    // not the masculine double-tooth form U+E005 U+E005 (Z52 ᡪᡪ).
+    let to_z52 = |word: &str| {
+        let out = cli()
+            .args(["translate", "--from", "menk_letter", "--to", "z52", word])
+            .output()
+            .unwrap();
+        assert!(out.status.success(), "stderr: {}", String::from_utf8_lossy(&out.stderr));
+        String::from_utf8(out.stdout).unwrap()
+    };
+    assert_eq!(to_z52("ᠠᠩᠭᠯᠢ"), "ᡥᡪᡪᢊᢊᢑᡫ");
+    // Front-vowel control: already the hook form, must not change.
+    assert_eq!(to_z52("ᠡᠩᠭᠯᠢ"), "ᡥᡪᢊᢊᢑᡫ");
+    // Narrow scope: GA after a letter other than ANG keeps the double-tooth form.
+    assert_eq!(to_z52("ᠠᠭᠯᠢ"), "ᡥᡪᡪᡪᢑᡫ");
+    // GA before a vowel is table-driven and unaffected.
+    assert_eq!(to_z52("ᠮᠣᠩᠭᠣᠯ"), "ᢌᡭᡪᢊᡱᡱᡭᢐ");
+}

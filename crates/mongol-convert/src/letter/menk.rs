@@ -55,7 +55,7 @@ impl LetterTranslateRuleFrom for MenkLetterFrom {
         if let Some(r) = resolve_t(suf, key) {
             return Some(r);
         }
-        if let Some(r) = resolve_g(suf, key, nature) {
+        if let Some(r) = resolve_g(pre, suf, key, nature) {
             return Some(r);
         }
         if let Some(r) = F_MAP.get(key) {
@@ -127,8 +127,14 @@ fn resolve_t(suf: &[char], s: &str) -> Option<&'static str> {
     None
 }
 
-fn resolve_g(suf: &[char], s: &str, nature: Nature) -> Option<&'static str> {
+fn resolve_g(pre: &[char], suf: &[char], s: &str, nature: Nature) -> Option<&'static str> {
     if s == "\u{182d}" && !suf.is_empty() && mgl::is_giiguulegch(suf[0]) {
+        // GA after ANG ("ngg", e.g. ᠠᠩᠭᠯᠢ "England"): the GA keeps its hook form
+        // (U+E031) in both natures. The masculine double-tooth form (U+E005 U+E005)
+        // applies to GA after other letters only.
+        if preceded_by_ang(pre) {
+            return Some("\u{e031}");
+        }
         return Some(if nature == Nature::Chagh {
             "\u{e005}\u{e005}"
         } else {
@@ -136,6 +142,15 @@ fn resolve_g(suf: &[char], s: &str, nature: Nature) -> Option<&'static str> {
         });
     }
     None
+}
+
+/// True when the letter immediately before the current fragment is ANG (U+1829),
+/// ignoring any free variation selectors in between.
+fn preceded_by_ang(pre: &[char]) -> bool {
+    pre.iter()
+        .rev()
+        .find(|c| !mgl::is_free_variation_selector(**c))
+        == Some(&'\u{1829}')
 }
 
 // ---------- TO: Zvvnmod -> Menk-letter ----------
