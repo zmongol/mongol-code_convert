@@ -26,6 +26,7 @@ one of them is fixed in code:
 
 ## Fixes log
 
+- **2026-11-17 — jakeli / olaril (user corrections).** Draft wrote ᠵᠠᠠᠯᠢ for ᠵᠠᠬᠡᠯᠢ (jakeli, second word of "jaka jakeli") — the medial ᠬ was dropped; correct Z52 ᡬᡪᢊᡪᢑᡫ. Draft wrote ᠣᠯ᠍ᠢᠷᠠᠯ for ᠣᠯᠠᠷ᠍ᠢᠯ (olaril) — the ᠢ and ᠠ were transposed around ᠷ; correct Z52 ᡥᡭᢑᡪᢞᡬᢐ. Both verified by converting the correct MenkLetter forms through mongol-convert.
 - **2026-11-17 — England / medial GA after ANG.** Converter wrote
   ᠠᠩᠭᠯᠢ as ᡥᡪᡪᢊᡪᡪᢑᡫ; correct is ᡥᡪᡪᢊᢊᢑᡫ. Cause: `resolve_g` in
   `crates/mongol-convert/src/letter/menk.rs` returned the double-tooth form
@@ -60,6 +61,8 @@ verify the converter output first, then record it here.
 | ᠦᠨᠡ | ᠦᠨ᠎ᠠ (üne) | price | ᡥᡭᡬᡰᡨ | 2026-11-17 |
 | ᠳᠤᠤᠷᠠ | ᠳᠣᠣᠷ᠎ᠠ (doora) | lowest / below (in "lowest price") | ᢘᡭᡭᢝᡨ | 2026-11-17 |
 | ᠰᠠᠷᠠ | ᠰᠠᠷ᠎ᠠ (sara) | month (in "a month ago") | ᢔᡪᢝᡨ | 2026-11-17 |
+| ᠵᠠᠠᠯᠢ | ᠵᠠᠬᠡᠯᠢ (jakeli) | percentage point (second word in "jaka jakeli") | ᡬᡪᢊᡪᢑᡫ | 2026-11-17 |
+| ᠣᠯ᠍ᠢᠷᠠᠯ | ᠣᠯᠠᠷ᠍ᠢᠯ (olaril) | finding / gain | ᡥᡭᢑᡪᢞᡬᢐ | 2026-11-17 |
 
 ## General rules (from the corrections above)
 
