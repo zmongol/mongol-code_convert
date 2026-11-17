@@ -25,6 +25,15 @@ def command(*args):
     return subprocess.check_output(args, cwd=ROOT, text=True).strip()
 
 
+def remote_origin_url():
+    """HTTPS URL of the origin remote without a trailing .git, so the packaged
+    manifest records the fork this build actually came from."""
+    url = command("git", "config", "--get", "remote.origin.url")
+    if url.endswith(".git"):
+        url = url[: -len(".git")]
+    return url
+
+
 def runtime_packages(metadata):
     """Walk normal WASM dependencies, excluding build scripts and proc macros."""
     packages = {p["id"]: p for p in metadata["packages"]}
@@ -92,7 +101,7 @@ def main():
 
     manifest = {
         "mongol_convert_version": version,
-        "source": f"https://github.com/Satsrag/mongol-convert/tree/{commit}",
+        "source": f"{remote_origin_url()}/tree/{commit}",
         "source_commit": commit,
         "files_sha256": {
             name.removeprefix("assets/mongol-convert/"): hashlib.sha256(content).hexdigest()
